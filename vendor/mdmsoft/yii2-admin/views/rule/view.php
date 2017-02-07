@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'data-method' => 'post',
         ]);
         ?>
+        <?= Html::a(Yii::t('rbac-admin', 'Create'), ['create'], ['class' => 'btn btn-info']) ?>
     </p>
 
     <?php

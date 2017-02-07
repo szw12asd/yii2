@@ -22,7 +22,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'username',
-            'email:email',
             'created_at:date',
             [
                 'attribute' => 'status',
@@ -31,28 +30,36 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => [
                     0 => 'Inactive',
-                    10 => 'Active'
+                    1 => 'Active'
                 ]
             ],
+
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => Helper::filterActionColumn(['view', 'activate', 'delete']),
+                'header' => '操作',
+                'options' => ['width' => '100px;'],
+                'template' => '{view} {update} {delete}',
                 'buttons' => [
-                    'activate' => function($url, $model) {
-                        if ($model->status == 10) {
-                            return '';
-                        }
-                        $options = [
-                            'title' => Yii::t('rbac-admin', 'Activate'),
-                            'aria-label' => Yii::t('rbac-admin', 'Activate'),
-                            'data-confirm' => Yii::t('rbac-admin', 'Are you sure you want to activate this user?'),
-                            'data-method' => 'post',
-                            'data-pjax' => '0',
-                        ];
-                        return Html::a('<span class="glyphicon glyphicon-ok"></span>', $url, $options);
+                    'view' => function ($url, $model) {
+                        return Html::a('<i class="fa fa-eye">查看</i>', $url, [
+                            'title' => Yii::t('app', 'view'),
+                            'class' => 'del btn btn-primary btn-xs',
+                        ]);
+                    },
+                    'update' => function ($url, $model) {
+                        return Html::a('<i class="fa fa-edit">更新</i>', $url, [
+                            'title' => Yii::t('app', 'update'),
+                            'class' => 'del btn btn-success btn-xs',
+                        ]);
+                    },
+                    'delete' => function ($url, $model) {
+                        return Html::a('<i class="fa fa-close">删除</i>', $url, [
+                            'title' => Yii::t('app', 'delete'),
+                            'class' => 'del btn btn-danger btn-xs',
+                        ]);
                     }
-                    ]
                 ],
+            ],
             ],
         ]);
         ?>

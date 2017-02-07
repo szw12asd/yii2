@@ -13,12 +13,7 @@ class AdminLteAsset extends BaseAdminLteAsset
     public $sourcePath = '@vendor/almasaeed2010/adminlte/dist';
     public $css = [
         'css/AdminLTE.min.css',
-//        'css/animate.min.css',
-//        'css/bootstrap.css',
-//        'css/bootstrap.min14ed.css',
-//        'css/bootstrap-theme.css',
-//        'css/style.min.css',
-//        'css/style.min862f.css',
+        'css/main.css'
     ];
     public $js = [
         'js/app.min.js'
@@ -28,7 +23,6 @@ class AdminLteAsset extends BaseAdminLteAsset
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
-        'backend\assets\AppAsset'
     ];
 
     /**

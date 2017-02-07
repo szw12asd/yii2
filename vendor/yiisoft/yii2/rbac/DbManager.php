@@ -318,7 +318,6 @@ class DbManager extends BaseManager
         }
 
         $item->updatedAt = time();
-
         $this->db->createCommand()
             ->update($this->itemTable, [
                 'name' => $item->name,

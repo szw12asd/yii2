@@ -118,7 +118,6 @@ class BaseJson
                 $availableErrors[constant($const)] = $message;
             }
         }
-
         if (isset($availableErrors[$lastError])) {
             throw new InvalidParamException($availableErrors[$lastError], $lastError);
         }

@@ -54,7 +54,9 @@
         "yiisoft/yii2-authclient": "^2.1",
         "shmilyzxt/yii2-queue": "dev-master",
         "yiisoft/yii2-smarty": "^2.0",
-        "facebook/graph-sdk": "^5.4"
+        "facebook/graph-sdk": "^5.4",
+        "almasaeed2010/adminlte": "~2.0",
+        "warrence/yii2-kartikgii": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

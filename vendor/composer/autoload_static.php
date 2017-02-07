@@ -34,6 +34,10 @@ class ComposerStaticInit14f0cc355883da120b28fcacb2276add
             'yii\\authclient\\' => 15,
             'yii\\' => 4,
         ),
+        'w' => 
+        array (
+            'warrence\\kartikgii\\' => 19,
+        ),
         'r' => 
         array (
             'rmrevin\\yii\\fontawesome\\' => 24,
@@ -211,6 +215,10 @@ class ComposerStaticInit14f0cc355883da120b28fcacb2276add
         'yii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
+        ),
+        'warrence\\kartikgii\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/warrence/yii2-kartikgii',
         ),
         'rmrevin\\yii\\fontawesome\\' => 
         array (

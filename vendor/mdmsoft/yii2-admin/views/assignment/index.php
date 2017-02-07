@@ -15,14 +15,27 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $columns = [
     ['class' => 'yii\grid\SerialColumn'],
-    $usernameField,
+    [
+        'label' => '用户名',
+        'attribute' => $usernameField,
+    ],
 ];
 if (!empty($extraColumns)) {
     $columns = array_merge($columns, $extraColumns);
 }
 $columns[] = [
     'class' => 'yii\grid\ActionColumn',
-    'template' => '{view}'
+    'header' => '操作',
+    'template' => '{view}',
+    'buttons' => [
+        'view' => function ($url, $model) {
+            return Html::a('<i class="fa fa-edit"> 分配</i>', $url, [
+                'title' => Yii::t('app', 'view'),
+                'class' => 'del btn btn-primary btn-xs',
+            ]);
+        }
+    ],
+
 ];
 ?>
 <div class="assignment-index">

@@ -42,7 +42,33 @@ unset($rules[RouteRule::RULE_NAME]);
                 'attribute' => 'description',
                 'label' => Yii::t('rbac-admin', 'Description'),
             ],
-            ['class' => 'yii\grid\ActionColumn',],
+
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'header' => '操作',
+                'options' => ['width' => '100px;'],
+                'template' => '{view} {update} {delete}',
+                'buttons' => [
+                    'view' => function ($url, $model) {
+                        return Html::a('<i class="fa fa-eye">查看</i>', $url, [
+                            'title' => Yii::t('app', 'view'),
+                            'class' => 'del btn btn-primary btn-xs',
+                        ]);
+                    },
+                    'update' => function ($url, $model) {
+                        return Html::a('<i class="fa fa-edit">更新</i>', $url, [
+                            'title' => Yii::t('app', 'update'),
+                            'class' => 'del btn btn-success btn-xs',
+                        ]);
+                    },
+                    'delete' => function ($url, $model) {
+                        return Html::a('<i class="fa fa-close">删除</i>', $url, [
+                            'title' => Yii::t('app', 'delete'),
+                            'class' => 'del btn btn-danger btn-xs',
+                        ]);
+                    }
+                ],
+            ],
         ],
     ])
     ?>
