@@ -6,6 +6,7 @@ $params = array_merge(
     require(__DIR__ . '/params-local.php')
 );
 
+
 return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
@@ -73,8 +74,16 @@ return [
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],
+        'redis' => [
+            'class' => 'yii\redis\Connection',
+            'hostname' => 'localhost',
+            'port' => 6379,
+            'database' => 0,
+        ],
         'session' => [
             // this is the name of the session cookie used for login on the backend
+//            'class' => 'yii\redis\Session',
+            'timeout' => 6000,
             'name' => 'advanced-backend',
         ],
         'log' => [
