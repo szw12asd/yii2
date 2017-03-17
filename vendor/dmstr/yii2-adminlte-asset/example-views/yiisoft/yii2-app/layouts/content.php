@@ -2,6 +2,7 @@
 use yii\widgets\Breadcrumbs;
 use dmstr\widgets\Alert;
 
+\backend\assets\ViewAsset::register($this);
 ?>
 <div class="content-wrapper">
     <section class="content-header">

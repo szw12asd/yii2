@@ -18,7 +18,12 @@ class ViewAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
+        'css/bootstrap/bootstrap.css.map',
+        'css/bootstrap/bootstrap.min.css.map',
+        'css/bootstrap/bootstrap-grid.css.map',
+        'css/bootstrap/bootstrap-grid.min.css.map',
+        'css/bootstrap/bootstrap-reboot.css.map',
+        'css/bootstrap/bootstrap-reboot.min.css.map',
     ];
     public $js = [
     ];
