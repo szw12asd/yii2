@@ -56,12 +56,12 @@ class Menu extends \yii\db\ActiveRecord
 
     //获取顶级菜单列表
     public function  getAllMenu(){
-        $menu = Yii::$app->db->createCommand("SELECT * FROM `menu` WHERE parent='0' ")->queryAll();
+        $menu = Yii::$app->db->createCommand("SELECT * FROM `menu` WHERE [parent]='0' ")->queryAll();
         return $menu;
     }
     //获取所有菜单列表
     public function  getMenuList(){
-        $menu = Yii::$app->db->createCommand("SELECT * FROM `menu` ORDER BY sort ASC ")->queryAll();
+        $menu = Yii::$app->db->createCommand("SELECT * FROM `menu` ORDER BY [sort] ASC ")->queryAll();
         $menu = self::list_to_tree($menu,'id','parent');
         return $menu;
     }
@@ -82,7 +82,7 @@ class Menu extends \yii\db\ActiveRecord
         }
         $RolesList = substr($RolesList,0,-1);
 
-        $menu = Yii::$app->db->createCommand("SELECT * FROM `menu` WHERE route IN ($RolesList)  ORDER BY `order` ASC")->queryAll();
+        $menu = Yii::$app->db->createCommand("SELECT * FROM menu WHERE [route] IN ($RolesList) order by [order]")->queryAll();
         $menu = self::list_to_tree2($menu,'id','parent');
         return $menu;
     }
