@@ -24,8 +24,12 @@ class ViewAsset extends AssetBundle
         'css/bootstrap/bootstrap-grid.min.css.map',
         'css/bootstrap/bootstrap-reboot.css.map',
         'css/bootstrap/bootstrap-reboot.min.css.map',
+        'css/font-awesome.min93e3.css'
     ];
     public $js = [
+        'js/contabs.min.js',
+        'js/content.min.js',
+        'js/yii2.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

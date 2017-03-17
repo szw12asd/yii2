@@ -290,7 +290,6 @@ class DbManager extends BaseManager
                 ->delete($this->assignmentTable, ['item_name' => $item->name])
                 ->execute();
         }
-
         $this->db->createCommand()
             ->delete($this->itemTable, ['name' => $item->name])
             ->execute();
