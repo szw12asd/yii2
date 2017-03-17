@@ -12,19 +12,19 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'language'=>'zh-CN',
-    'charset'=>'UTF-8',
+    'language' => 'zh-CN',
+    'charset' => 'UTF-8',
     'timeZone' => 'Asia/Shanghai',
     'modules' => [
         'admin' => [
             'class' => 'mdm\admin\Module',
 //            'layout' => 'left-menu',//yii2-admin的导航菜单
         ],
-        'gridview' =>  [
+        'gridview' => [
             'class' => '\kartik\grid\Module',
             'downloadAction' => 'gridview/export/download',
         ],
-        'datecontrol' =>  [
+        'datecontrol' => [
             'class' => 'kartik\datecontrol\Module',
 
             // format settings for displaying each date attribute
@@ -42,13 +42,12 @@ return [
             ],
 
 
-
             // automatically use kartik\widgets for each of the above formats
             'autoWidget' => true,
 
         ]
     ],
-    'name'=>'YII',
+    'name' => 'YII',
     "aliases" => [
         "@mdm/admin" => "@vendor/mdmsoft/yii2-admin",
     ],
@@ -58,10 +57,17 @@ return [
 //            'site/*',//允许访问的节点，可自行添加
 //            'admin/*',//允许所有人访问admin节点及其子节点
 //            'debug/*',
-        '*'
+            '*'
         ]
     ],
     'components' => [
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'sqlsrv:Server:localhost;Database:yii2',
+            'username' => 'phper',
+            'password' => 'szw12asd',
+            'charset' => 'utf-8'
+        ],
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
@@ -102,9 +108,9 @@ return [
             'enablePrettyUrl' => true,
 //            'showScriptName' => false,
             'rules' => [
-                '<controller:\w+>/<id:\d+>'=>'<controller>/view',
-                '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-                '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ],
         ],
     ],
