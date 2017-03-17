@@ -61,12 +61,13 @@ return [
         ]
     ],
     'components' => [
+        //SQLSERVER数据库配置
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'sqlsrv:Server:localhost;Database:yii2',
+            'dsn' => 'sqlsrv:Server=localhost;Database=yii2',
             'username' => 'phper',
             'password' => 'szw12asd',
-            'charset' => 'utf-8'
+            'charset' => 'utf8'
         ],
         'request' => [
             'csrfParam' => '_csrf-backend',
