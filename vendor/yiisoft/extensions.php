@@ -589,4 +589,22 @@ return array (
       '@yii/smarty' => $vendorDir . '/yiisoft/yii2-smarty',
     ),
   ),
+  'perminder-klair/yii2-dropzone' => 
+  array (
+    'name' => 'perminder-klair/yii2-dropzone',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@kato' => $vendorDir . '/perminder-klair/yii2-dropzone',
+    ),
+  ),
+  'aryelds/yii2-sweet-alert' => 
+  array (
+    'name' => 'aryelds/yii2-sweet-alert',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@aryelds/sweetalert' => $vendorDir . '/aryelds/yii2-sweet-alert',
+    ),
+  ),
 );

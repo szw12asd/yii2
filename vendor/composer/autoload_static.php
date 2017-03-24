@@ -52,6 +52,7 @@ class ComposerStaticInit14f0cc355883da120b28fcacb2276add
         ),
         'k' => 
         array (
+            'kato\\' => 5,
             'kartik\\widgets\\' => 15,
             'kartik\\typeahead\\' => 17,
             'kartik\\tree\\' => 12,
@@ -117,6 +118,10 @@ class ComposerStaticInit14f0cc355883da120b28fcacb2276add
         array (
             'creocoder\\nestedsets\\' => 21,
             'cebe\\markdown\\' => 14,
+        ),
+        'a' => 
+        array (
+            'aryelds\\sweetalert\\' => 19,
         ),
         '\\' => 
         array (
@@ -233,6 +238,10 @@ class ComposerStaticInit14f0cc355883da120b28fcacb2276add
         'mdm\\admin\\' => 
         array (
             0 => __DIR__ . '/..' . '/mdmsoft/yii2-admin',
+        ),
+        'kato\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/perminder-klair/yii2-dropzone',
         ),
         'kartik\\widgets\\' => 
         array (
@@ -469,6 +478,10 @@ class ComposerStaticInit14f0cc355883da120b28fcacb2276add
         'cebe\\markdown\\' => 
         array (
             0 => __DIR__ . '/..' . '/cebe/markdown',
+        ),
+        'aryelds\\sweetalert\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/aryelds/yii2-sweet-alert',
         ),
         '\\shmilyzxt\\queue\\' => 
         array (

@@ -7,7 +7,7 @@ use yii\base\Model;
 /**
  * Login form
  */
-class LoginForm extends User
+class LoginForm extends Admin
 {
     public $username;
     public $password;
@@ -99,12 +99,12 @@ class LoginForm extends User
     /**
      * Finds user by [[username]]
      *
-     * @return User|null
+     * @return Admin|null
      */
     protected function getUser()
     {
         if ($this->_user === null) {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = Admin::findByUsername($this->username);
         }
 
         return $this->_user;

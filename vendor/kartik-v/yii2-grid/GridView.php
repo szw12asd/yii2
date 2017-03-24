@@ -4,14 +4,13 @@
  * @package   yii2-grid
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2016
- * @version   3.1.4
+ * @version   3.1.3
  */
 
 namespace kartik\grid;
 
 use kartik\base\Config;
 use kartik\dialog\Dialog;
-use kartik\mpdf\Pdf;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\bootstrap\ButtonDropdown;
@@ -39,7 +38,7 @@ use yii\widgets\Pjax;
  *
  * A basic usage of the widget looks like the following:
  *
- * ~~~
+ * ```php
  * <?= GridView::widget([
  *     'dataProvider' => $dataProvider,
  *     'columns' => [
@@ -49,7 +48,7 @@ use yii\widgets\Pjax;
  *         // ...
  *     ]
  * ]) ?>
- * ~~~
+ * ```
  *
  * @see http://demos.krajee.com/grid
  * @author Kartik Visweswaran <kartikv2@gmail.com>
@@ -586,7 +585,7 @@ HTML;
     /**
      * @var boolean whether the grid will have a `striped` style. Applicable only if `bootstrap` is `true`.
      */
-    public $striped = true;
+    public $striped = false;
 
     /**
      * @var boolean whether the grid will have a `condensed` style. Applicable only if `bootstrap` is `true`.
@@ -657,7 +656,7 @@ HTML;
     /**
      * @array the HTML attributes for the summary row.
      */
-    public $pageSummaryRowOptions = ['class' => 'kv-page-summary warning'];
+    public $pageSummaryRowOptions = ['class' => 'kv-page-summary info'];
 
     /**
      * @var string the default pagination that will be read by toggle data. Should be one of 'page' or 'all'. If not
@@ -1045,47 +1044,38 @@ HTML;
         $iconPrefix = $this->export['fontAwesome'] ? 'fa fa-' : 'glyphicon glyphicon-';
         $title = ($icon == '') ? $title : "<i class='{$iconPrefix}{$icon}'></i> {$title}";
         $action = $this->_module->downloadAction;
+        if (!is_array($action)) {
+            $action = [$action];
+        }
         $encoding = ArrayHelper::getValue($this->export, 'encoding', 'utf-8');
         $bom = ArrayHelper::getValue($this->export, 'bom', true);
         $target = ArrayHelper::getValue($this->export, 'target', self::TARGET_POPUP);
         $form = Html::beginForm(
-                is_array($action) ? $action : [$action],
-                'post',
-                [
-                   'class' => 'kv-export-form',
-                   'style' => 'display:none',
-                   'target' => ($target == self::TARGET_POPUP) ? 'kvDownloadDialog' : $target,
+                $action, 'post', [
+                    'class' => 'kv-export-form',
+                    'style' => 'display:none',
+                    'target' => ($target == self::TARGET_POPUP) ? 'kvDownloadDialog' : $target,
                 ]
             ) . "\n" .
-            Html::hiddenInput('export_hash') . "\n" .
             Html::hiddenInput('export_filetype') . "\n" .
             Html::hiddenInput('export_filename') . "\n" .
             Html::hiddenInput('export_mime') . "\n" .
             Html::hiddenInput('export_config') . "\n" .
             Html::hiddenInput('export_encoding', $encoding) . "\n" .
             Html::hiddenInput('export_bom', $bom) . "\n" .
-            Html::textarea('export_content') . "\n" .
-            "</form>";
+            Html::textarea('export_content') . "\n</form>";
         $items = empty($this->export['header']) ? [] : [$this->export['header']];
         foreach ($this->exportConfig as $format => $setting) {
             $iconOptions = ArrayHelper::getValue($setting, 'iconOptions', []);
             Html::addCssClass($iconOptions, $iconPrefix . $setting['icon']);
             $label = (empty($setting['icon']) || $setting['icon'] == '') ? $setting['label'] :
                 Html::tag('i', '', $iconOptions) . ' ' . $setting['label'];
-            $mime = ArrayHelper::getValue($setting, 'mime', 'text/plain');
-            $config = ArrayHelper::getValue($setting, 'config', []);
-            if ($format === self::JSON) {
-                unset($config['jsonReplacer']);
-            }
-            $dataToHash = $setting['filename'] . $mime . $encoding . $bom . Json::encode($config);
-            $hash = Yii::$app->security->hashData($dataToHash, $this->_module->exportEncryptSalt);
             $items[] = [
                 'label' => $label,
                 'url' => '#',
                 'linkOptions' => [
                     'class' => 'export-' . $format,
-                    'data-mime' => $mime,
-                    'data-hash' => $hash,
+                    'data-format' => ArrayHelper::getValue($setting, 'mime', 'text/plain'),
                 ],
                 'options' => $setting['options'],
             ];
@@ -1094,14 +1084,14 @@ HTML;
         $itemsAfter = ArrayHelper::getValue($this->export, 'itemsAfter', []);
         $items = ArrayHelper::merge($itemsBefore, $items, $itemsAfter);
         return ButtonDropdown::widget(
-            [
-                'label' => $title,
-                'dropdown' => ['items' => $items, 'encodeLabels' => false, 'options' => $menuOptions],
-                'options' => $options,
-                'containerOptions' => $this->exportContainer,
-                'encodeLabel' => false,
-            ]
-        ) . $form;
+                [
+                    'label' => $title,
+                    'dropdown' => ['items' => $items, 'encodeLabels' => false, 'options' => $menuOptions],
+                    'options' => $options,
+                    'containerOptions' => $this->exportContainer,
+                    'encodeLabel' => false,
+                ]
+            ) . $form;
     }
 
     /**
@@ -1124,10 +1114,10 @@ HTML;
             $content .= $this->renderFilters();
         }
         return "<thead>\n" .
-        $this->generateRows($this->beforeHeader) . "\n" .
-        $content . "\n" .
-        $this->generateRows($this->afterHeader) . "\n" .
-        "</thead>";
+            $this->generateRows($this->beforeHeader) . "\n" .
+            $content . "\n" .
+            $this->generateRows($this->afterHeader) . "\n" .
+            "</thead>";
     }
 
     /**
@@ -1390,12 +1380,6 @@ HTML;
                 ],
             ],
         ];
-
-        // Remove PDF if dependency is not loaded.
-        if (!class_exists("\\kartik\\mpdf\\Pdf")) {
-            unset($defaultExportConfig[self::PDF]);
-        }
-
         $this->exportConfig = self::parseExportConfig($this->exportConfig, $defaultExportConfig);
     }
 
@@ -1750,7 +1734,7 @@ HTML;
         $gridId = $this->options['id'];
         if ($this->export !== false && is_array($this->export) && !empty($this->export)) {
             GridExportAsset::register($view);
-            $target = ArrayHelper::getValue($this->export, 'target', self::TARGET_BLANK);
+            $target = ArrayHelper::getValue($this->export, 'target', self::TARGET_POPUP);
             $gridOpts = Json::encode(
                 [
                     'gridId' => $gridId,
@@ -1774,13 +1758,15 @@ HTML;
                 );
                 $genOptsVar = 'kvGridExp_' . hash('crc32', $genOpts);
                 $view->registerJs("var {$genOptsVar}={$genOpts};", View::POS_HEAD);
-                $expOpts = Json::encode([
-                    'dialogLib' => ArrayHelper::getValue($this->krajeeDialogSettings, 'libName', 'krajeeDialog'),
-                    'gridOpts' => new JsExpression($gridOptsVar),
-                    'genOpts' => new JsExpression($genOptsVar),
-                    'alertMsg' => ArrayHelper::getValue($setting, 'alertMsg', false),
-                    'config' => ArrayHelper::getValue($setting, 'config', [])
-                ]);
+                $expOpts = Json::encode(
+                    [
+                        'dialogLib' => ArrayHelper::getValue($this->krajeeDialogSettings, 'libName', 'krajeeDialog'),
+                        'gridOpts' => new JsExpression($gridOptsVar),
+                        'genOpts' => new JsExpression($genOptsVar),
+                        'alertMsg' => ArrayHelper::getValue($setting, 'alertMsg', false),
+                        'config' => ArrayHelper::getValue($setting, 'config', []),
+                    ]
+                );
                 $expOptsVar = 'kvGridExp_' . hash('crc32', $expOpts);
                 $view->registerJs("var {$expOptsVar}={$expOpts};", View::POS_HEAD);
                 $script .= "{$id}.gridexport({$expOptsVar});";

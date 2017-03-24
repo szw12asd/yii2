@@ -6,7 +6,6 @@ use backend\models\Menu;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-
 if (Yii::$app->controller->action->id === 'login') { 
 /**
  * Do not use this code in your template. Remove it. 
@@ -23,7 +22,6 @@ if (Yii::$app->controller->action->id === 'login') {
     }
 //        return $this->redirect(['/index/welcome']);
     $userRole = key(Yii::$app->authManager->getRolesByUser($user->getId()));
-    $user = Yii::$app->user->identity;
     $menu = new Menu();
     $menu = $menu->getLeftMenuList();
     if (class_exists('backend\assets\AppAsset')) {
@@ -48,8 +46,13 @@ if (Yii::$app->controller->action->id === 'login') {
         <?php $this->head() ?>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
+    <style>
+        .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > .treeview-menu{
+            top: 43px;
+        }
+    </style>
     <?php $this->beginBody() ?>
-    <div class="wrapper">
+    <div class="wrapper" style="padding: 0px">
         <?= $this->render(
             'header.php',
             ['directoryAsset' => $directoryAsset,'user'=>$user,'userRole'=>$userRole]

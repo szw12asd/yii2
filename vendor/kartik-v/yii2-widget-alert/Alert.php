@@ -66,13 +66,13 @@ class Alert extends \yii\bootstrap\Alert
     /**
      * @var bool show title separator. Only applicable if `title` is set.
      */
-    public $showSeparator = false;
+    public $showSeparator = true;
 
     /**
      * @var integer the delay in microseconds after which the alert will be displayed.
      * Will be useful when multiple alerts are to be shown.
      */
-    public $delay;
+    public $delay = 2000;
 
     /**
      * Runs the widget

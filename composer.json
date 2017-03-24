@@ -56,7 +56,9 @@
         "yiisoft/yii2-smarty": "^2.0",
         "facebook/graph-sdk": "^5.4",
         "almasaeed2010/adminlte": "~2.0",
-        "warrence/yii2-kartikgii": "dev-master"
+        "warrence/yii2-kartikgii": "dev-master",
+        "perminder-klair/yii2-dropzone": "dev-master",
+        "aryelds/yii2-sweet-alert": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

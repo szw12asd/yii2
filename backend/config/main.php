@@ -54,10 +54,10 @@ return [
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
-//            'site/*',//允许访问的节点，可自行添加
-//            'admin/*',//允许所有人访问admin节点及其子节点
-//            'debug/*',
-            '*'
+            'site/login',//允许访问的节点，可自行添加
+            'debug/*',
+            'site/error',
+            'gii/*'
         ]
     ],
     'components' => [
@@ -77,7 +77,7 @@ return [
             "defaultRoles" => ["guest"],
         ],
         'user' => [
-            'identityClass' => 'backend\models\User',
+            'identityClass' => 'backend\models\Admin',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],
