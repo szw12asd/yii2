@@ -20,7 +20,6 @@ class ImageController extends \yii\base\Controller{
 
         if (isset($_FILES[$fileName])) {
             $file = \yii\web\UploadedFile::getInstanceByName($fileName);
-
             //Print file data
             //print_r($file);
 

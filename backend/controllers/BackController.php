@@ -28,7 +28,6 @@ class BackController extends Controller
             ],
         ];
     }
-
     /**
      * Lists all Admin models.
      * @return mixed
@@ -44,8 +43,7 @@ class BackController extends Controller
         ]);
     }
 
-    public function actionUpload()
-    {
+    public function actionUpload() {
         $goodType = new Admin();
         $file_name = 'admin_logo_' . time().'_'.rand(10000,99999);
         if (Yii::$app->request->isPost) {
